@@ -12,12 +12,12 @@ References
 
 [1] L-99: Ninety-Nine Lisp Problems
 
-    [http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html]
+    http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html
 
 [2] 99 Problems (solved) in OCaml
 
-    [http://ocaml.org/tutorials/99problems.html]
+    http://ocaml.org/tutorials/99problems.html
 
 [3] 99-Problems-OCaml Repo by VictorNicollet
 
-    [https://github.com/VictorNicollet/99-Problems-OCaml]
+    https://github.com/VictorNicollet/99-Problems-OCaml
