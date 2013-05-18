@@ -64,7 +64,7 @@ let length (lst : 'a list) : int =
   let rec loop (l : 'a list) (aux : int) : int =
     match l with
     | [] -> aux
-    | h :: t -> loop t (aux + 1)
+    | _ :: t -> loop t (aux + 1)
   in loop lst 0
 ;;
 
