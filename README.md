@@ -5,7 +5,7 @@ Practice makes perfect!
 
 This repo tracks my solutions to the 99 Lisp Problems[1] solved in OCaml, and the problems are also part of the OCaml tutorials in ocaml.org[2]. 
 
-I guarantee the originality of my solutions in this repo, and I will refer to the existing ones by VictorNicollet[3] to improve mine. Sincere thanks to VictorNicollet, without whose contribution, I would not find such a good way learn OCaml.
+I guarantee the originality of my solutions in this repo, and I will refer to the existing ones by VictorNicollet[3] to improve mine. Sincere thanks to VictorNicollet, without whose contribution, I would not find such a good way to learn OCaml.
 
 
 References
