@@ -25,7 +25,7 @@ let is_palindrome (lst : 'a list) : bool =
 let is_palindrome (lst : 'a list) : bool =
   let rec loop (n : int) (m : int) (l : 'a list) : bool =
     if n < m then
-      if List.nth l n <> List.nth l m then false
+      if List.nth l n != List.nth l m then false
       else loop (n + 1) (m - 1) l
     else true
   in loop 0 ((List.length lst) - 1) lst
@@ -60,4 +60,20 @@ let is_palindrome (lst : 'a list) : bool =
     else true
   in loop 0 ((List.length lst) - 1) lst
 ;;
-  
+
+(* Generalize is_palindrome in a functional style:
+   pass List.nth or nth as a argument
+
+   Function Type:
+   val is_palindrome (val find_nth : 'a list -> int -> 'a) (lst : 'a list) : bool
+ *)
+
+let is_palindrom (find_nth : 'a list -> int -> 'a) (lst : 'a list) : bool
+  let rec loop (n : int) (m : int) (l : 'a list) : bool
+    if n < m then
+      if find_nth l n != find_nth l m then false
+      else loop (n + 1) (m - 1) l
+    else true
+  in loop 0 ((List.length lst) - 1) lst
+;;
+
