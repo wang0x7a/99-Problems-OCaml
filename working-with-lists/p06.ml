@@ -24,9 +24,10 @@ let is_palindrome (lst : 'a list) : bool =
  *)
 let is_palindrome (lst : 'a list) : bool =
   let rec loop (n : int) (m : int) (l : 'a list) : bool =
-    if n > m then true
-    else if List.nth l n != List.nth l m then false
-    else loop (n + 1) (m - 1) l
+    if n < m then
+      if List.nth l n <> List.nth l m then false
+      else loop (n + 1) (m - 1) l
+    else true
   in loop 0 ((List.length lst) - 1) lst
 ;;
 
