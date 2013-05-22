@@ -28,3 +28,16 @@ let pack (lst : 'a list) : ('a list) list =
     | others -> sub_acc :: acc
   in List.rev ( loop [] [] lst)
 ;;
+
+(* Simplized version *)
+let pack (lst : 'a list) : ('a list) list =
+  let rec loop (acc : ('a list) list) (sub_acc : 'a list) (l : 'a list) :
+  ('a list) list =
+    match l with
+    | [] -> []
+    | [x] -> (x :: sub_acc) :: acc
+    | a :: (b :: _ as t) ->
+      if a = b then loop acc (a :: sub_acc) t
+      else loop ((a :: sub_acc) :: acc) [] t
+  in List.rev (loop [] [] lst)
+;;
