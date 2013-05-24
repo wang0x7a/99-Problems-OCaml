@@ -17,3 +17,16 @@ let split (lst : 'a list) (n : int) : ('a list) * ('a list) =
       else loop (tmp @ [h]) (i - 1) t
     in loop [] n lst
 ;;
+
+(* Improved version
+   Since List.length will iterate the whole list as well, we can merge
+   the if-else conditions.
+ *)
+let split (lst : 'a list) (n : int) : ('a list) * ('a list) =
+  let rec loop (tmp : 'a list) (i : int) = function
+    | [] -> (tmp, [])
+    | h :: t as l ->
+      if i = 0 then (tmp, l)
+      else loop (tmp @ [h]) (i - 1) t
+  in loop [] n lst
+;;
