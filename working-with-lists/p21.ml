@@ -8,6 +8,9 @@
 
 let insert_at (elem : 'a) (k : int) (lst : 'a list) : 'a list =
   let rec search (acc : 'a list) (i : int) = function
+  (* In VictorNicollet's solution,
+     [] -> [] fails to insert an element to an empty list.
+   *)
   | [] -> acc @ [elem]
   | h :: t as l->
     if i = k then (acc @ [elem]) @ l
