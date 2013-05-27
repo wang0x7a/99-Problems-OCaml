@@ -12,9 +12,10 @@ let rotate (lst : 'a list) (n : int) : 'a list =
   else 
     let n = (len + n) mod len in
     let rec loop (acc : 'a list) (i : int) = function
-    | [] -> []
     | h :: t as l-> 
       if i = 0 then l @ (List.rev acc)
       else loop (h :: acc) (i - 1) t
+    (* pattern [] will never be matched *)
+    | others -> others
     in loop [] n lst
 ;;
