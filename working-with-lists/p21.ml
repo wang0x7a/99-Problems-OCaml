@@ -3,7 +3,7 @@
    Start counting list elements with 0.
 
    Function Type:
-   val insert_at : int -> 'a -> 'a list
+   val insert_at : 'a -> int -> 'a list -> 'a list
  *)
 
 let insert_at (elem : 'a) (k : int) (lst : 'a list) : 'a list =
