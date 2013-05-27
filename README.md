@@ -9,6 +9,7 @@ I guarantee the originality of my solutions in this repo, and I will refer to th
 
 
 References
+----------
 
 [1] L-99: Ninety-Nine Lisp Problems
 
