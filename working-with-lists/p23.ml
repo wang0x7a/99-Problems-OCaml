@@ -24,11 +24,11 @@ let rand_select (lst : 'a list) (num : int) : 'a list =
   in
   (* The main entry of this function *)
   let rec loop (acc : 'a list) (i : int) (l : 'a list) (len : int) : 'a list =
-    if i = num then acc
+    if i = 0 then acc
     else
       let selected, rest = rand_extract l len in
-      loop (selected :: acc) (i + 1) rest (len - 1)
+      loop (selected :: acc) (i - 1) rest (len - 1)
   in
   let len = List.length lst in
-  loop [] 0 lst len
+  loop [] (min num len) lst len
 ;;
