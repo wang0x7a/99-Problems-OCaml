@@ -28,7 +28,24 @@
 let group (persons : 'a list) (sizes : int list) : 'a list list =
   let initialize = List.map (fun size -> size, []) sizes in
 
+  (* Prepend accepts a single element (elem) and insert to each possible groups 
+     (lst) that can support it (n > 0), and reserves every possibility. E.g.,
+     x -> [1,[a]; 2, [b]] -> [[0, [x, a]; 2, [b]]; [1, [a]; 1, [x, b]]]
+  *)
   let prepend (elem : 'a) (lst : (int * 'a list) list) : 
   (int * 'a list) list list =
-      
+
+    let reserve (l : (int * 'a list) list) (acc : (int * 'a list) list list) :
+    (int * 'a list) list list = l :: acc
+    in
+
+    (* main entry of prepend *)
+    let rec loop (acc : (int * 'a list) list list) emit = function
+      (* tail recursion *)
+      | [] -> acc
+      (* bind important variables *)
+      | ((n, l) as h) :: t ->
+        let acc = if n > 0 then emit ((n - 1, p :: l) :: t) acc else acc in
+        loop acc (fun l acc -> (h :: l) :: acc) t
+    in loop [] emit
 ;;
