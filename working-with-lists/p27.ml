@@ -25,7 +25,7 @@
    (3) Higher-order function (again). I find that it is very useful for the 
        recursion when we need to reserve the previous elements.
 *)
-let group (persons : 'a list) (sizes : int list) : 'a list list =
+let group (persons : 'a list) (sizes : int list) : 'a list list list =
   let initialize = List.map (fun size -> size, []) sizes in
 
   (* Prepend accepts a single element (elem) and insert to each possible groups 
@@ -51,7 +51,7 @@ let group (persons : 'a list) (sizes : int list) : 'a list list =
   in
 
   (* main loop of group *)
-  let rec loop (l : 'a list) : (int * 'a list) list =
+  let rec loop (l : 'a list) : (int * 'a list) list list =
     match l with
     (* creating the first template with sizes list *)
     | [] -> [ initialize ]
