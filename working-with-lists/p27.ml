@@ -40,12 +40,25 @@ let group (persons : 'a list) (sizes : int list) : 'a list list =
     in
 
     (* main entry of prepend *)
-    let rec loop (acc : (int * 'a list) list list) emit = function
-      (* tail recursion *)
-      | [] -> acc
+    let rec loop (acc : (int * 'a list) list list) reserve = function
+      (* tail recursion, reserving the template *)
+      | [] -> reserve [] acc
       (* bind important variables *)
       | ((n, l) as h) :: t ->
-        let acc = if n > 0 then emit ((n - 1, p :: l) :: t) acc else acc in
-        loop acc (fun l acc -> (h :: l) :: acc) t
-    in loop [] emit
+        let acc = if n > 0 then reserve ((n - 1, elem :: l) :: t) acc else acc in
+        loop acc (fun l acc -> reserve (h :: l) acc) t
+    in loop [] reserve lst
+  in
+
+  (* main loop of group *)
+  let rec loop (l : 'a list) : (int * 'a list) list =
+    match l with
+    (* creating the first template with sizes list *)
+    | [] -> [ initialize ]
+    | h :: t -> List.concat (List.map (prepend h) (loop t))
+  in
+  
+  let all = loop persons in
+  let complete = List.filter (List.for_all (fun (x, _) -> x = 0)) all in
+  List.map (List.map snd) complete
 ;;
