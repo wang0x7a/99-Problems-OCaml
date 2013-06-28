@@ -11,8 +11,12 @@ let is_prime (num : int) : bool =
 (* Instead of considering each possible divisor, we can also take a pair
  * of divisors into consideration directly, reducing the time complexity 
  * from n/2 down to sqrt(n) *)
+exception InvalidNumber
+
 let is_prime (num : int) : bool =
-  let rec loop (d : int) : bool =
-    (d * d > num) || (num mod d <> 0 && loop (d + 1))
-  in loop 2
+  if num <= 0 then raise InvalidNumber
+  else
+    let rec loop (d : int) : bool =
+      (d * d > num) || (num mod d <> 0 && loop (d + 1))
+    in loop 2
 ;;
