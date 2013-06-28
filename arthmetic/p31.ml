@@ -18,5 +18,5 @@ let is_prime (num : int) : bool =
   else
     let rec loop (d : int) : bool =
       (d * d > num) || (num mod d <> 0 && loop (d + 1))
-    in loop 2
+    in num <> 1 && loop 2
 ;;
