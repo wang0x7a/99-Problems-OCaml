@@ -32,3 +32,12 @@ let phi (n : int) : int =
   if n = 1 then 1
   else aux 0 1
 ;;
+
+let phi (n : int) : int =
+  let rec aux (count : int) (i : int) : int =
+    if i < n then
+      aux (if coprime n i then count + 1 else count) (i + 1)
+    else count
+  in
+  if n = 1 then 1 else aux 0 1
+;;
