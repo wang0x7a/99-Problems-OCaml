@@ -28,5 +28,7 @@ let phi (n : int) : int =
     else
       if coprime n i then aux (count + 1) (i + 1)
       else aux count (i + 1)
-  in aux 0 1
+  in
+  if n = 1 then 1
+  else aux 0 1
 ;;
