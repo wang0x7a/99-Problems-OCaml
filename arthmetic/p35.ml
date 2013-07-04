@@ -56,3 +56,14 @@ let factors (n : int) : int list =
   in
   aux 2 n
 ;;
+
+(* A tail-recursive version of the solution above. *)
+let factors (n : int) : int list =
+  let rec aux (acc : int list) (d : int) (i : int) : int list =
+    if i = 1 then acc
+    else
+      if i mod d = 0 then aux (d :: acc) d (i / d)
+      else aux acc (d + 1) i
+  in
+  List.rev (aux [] 2 n)
+;;
