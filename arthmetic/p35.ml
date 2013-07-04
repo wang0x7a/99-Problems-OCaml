@@ -31,7 +31,7 @@ let factors (n : int) : int list =
     else
       (* if is_prime d && c mod d = 0 
        * there is no need to test whether d is a prime each time,
-       * unless c < d, d will be a prime *)
+       * as long as c < d, d will be a prime *)
       if c < n && c mod d = 0 then aux (d :: acc) d (c / d)
       else
         if n mod (d - 1) = 0 && is_prime (d - 1)
