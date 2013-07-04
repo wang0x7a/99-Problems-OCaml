@@ -43,3 +43,16 @@ let factors (n : int) : int list =
     if n = 1 then [] else [n]
   | l -> l
 ;;
+
+(* A more elegant but non-tail-recursive version.
+ * Find its prime factors from the smallest, and the non-primitive ones 
+ * will be eliminated automatically.*)
+let factors (n : int) : int list =
+  let rec aux (d : int) (n : int) : int list =
+    if n = 1 then []
+    else
+      if n mod d = 0 then d :: (aux d (n / d))
+      else aux (d + 1) n
+  in
+  aux 2 n
+;;
