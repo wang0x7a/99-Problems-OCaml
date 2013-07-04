@@ -32,11 +32,10 @@ let pow (x : int) (y : int) : int =
   in
   aux 1 y
 
-let phi (m : int) : int =
-  let fac = factors m in
+let phi (n : int) : int =
   let rec aux (acc : int) = function
   | [] -> acc
   | (p, m) :: t -> aux ((p - 1) * (pow p (m - 1)) * acc) t
   in
-  aux 1 fac
+  aux 1 (factors n)
 ;;
