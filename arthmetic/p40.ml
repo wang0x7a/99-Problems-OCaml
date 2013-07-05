@@ -28,3 +28,14 @@ let goldbach (n : int) : int * int =
       else loop (i + 1)
     in loop 1
 ;;
+
+(* Solution by VictorNicollet 
+ * Mine is slightly faster (but not too much) than Victor's,
+ * since is_prime check for even numbers won't take too much time.
+ *)
+let goldbach (n : int) : int * int =
+  let rec aux (d : int) : int * int =
+    if (is_prime d) && (is_prime (n - d)) then (d, n - d)
+    else aux (d + 1)
+  in aux 2
+;;
