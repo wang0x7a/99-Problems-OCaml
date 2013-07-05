@@ -12,6 +12,7 @@ let timeit f a =
 (******************************)
 (* Some notes of ";;" and ";" *)
 (******************************)
+(* Ref: http://ocaml.org/tutorials/structure_of_ocaml_programs.html *)
 (* Rule #1:
  * use ";;" to separate statements at the top-level of code, and never within
  * function definitions or any other kind of statement.
