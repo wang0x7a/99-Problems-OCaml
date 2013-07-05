@@ -39,10 +39,41 @@ let phi (n : int) : int =
 
 let all_primes (a : int) (b : int) : int list =
   let upper = if a < b then b else a in
-  let rec loop (acc : int list) (i : int) : int list =
+  let rec aux (acc : int list) (i : int) : int list =
     if i = upper + 1 then acc
-    else loop (if phi i = i - 1 then i :: acc else acc) (i + 1)
+    else aux (if phi i = i - 1 then i :: acc else acc) (i + 1)
   in
-  if a < b then loop [] a
-  else loop [] b
+  if a < b then aux [] a
+  else aux [] b
+;;
+
+(* Another solution:
+ * Check if the number is prime one by one with is_prime function*)
+let is_prime (n : int) : bool =
+  if n = 1 then false
+  else
+    let rec is_not_divisor (d : int) : bool =
+      d * d > n || ((n mod d <> 0) && is_not_divisor (d + 1))
+    in is_not_divisor 2
+
+let is_prime_phi i = phi i = i - 1
+
+let all_primes (a : int) (b : int) (f : int -> bool) : int list =
+  let upper = if a < b then b else a in
+  let rec aux (acc : int list) (i : int) : int list =
+    if i = upper + 1 then acc
+    else aux (if f i then i :: acc else acc) (i + 1)
+  in
+  if a < b then aux [] a
+  else aux [] b
+;;
+
+(* Compare the two algorithms *)
+#load "unix.cma"
+
+let timeit f a b g =
+  let t0 = Unix.gettimeofday() in
+  ignore(f a b g);
+  let t1 = Unix.gettimeofday() in
+  t1 -. t0
 ;;
