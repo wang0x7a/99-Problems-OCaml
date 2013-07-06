@@ -57,3 +57,9 @@ let goldbach_list_limit (a : int) (b : int) (limit : int)
   if a < b then aux [] a
   else aux [] b
 ;;
+
+(* Use List.filter *)
+let goldbach_list_limit (a : int) (b : int) (limit : int) 
+: (int * (int * int)) list =
+  List.filter (fun (_, (a, b)) -> a >= limit && b >= limit ) (goldbach_list a b)
+;;
