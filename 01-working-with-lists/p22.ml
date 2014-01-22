@@ -28,4 +28,32 @@ let range (p : int) (q : int) : int list =
   in
     if p <= q then List.rev (aux [] p q)
     else aux [] q p
+
+
+(* Without List.rev, but UGLY *)
+let range a b =
+  if a <= b then
+    let rec aux acc i =
+      if i >= a then aux (i :: acc) (i - 1)
+      else acc
+    in
+    aux [] b
+  else
+    let rec aux acc i =
+      if i <= a then aux (i :: acc) (i + 1)
+      else acc
+    in
+    aux [] b
+
+(* Improved by making use of the features of FP*)
+let range a b =
+  let (op1, op2) = 
+    if a <= b then ((>=), (-))
+    else ((<=), (+))
+  in
+  let rec aux acc i =
+    if op1 i a then aux (i :: acc) (op2 i 1)
+    else acc
+  in
+  aux [] b
 ;;
