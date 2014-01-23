@@ -58,3 +58,34 @@ let select_two list =
   in
   aux [] list
 ;;
+
+(* a scalable version by my own *)
+open Core.Std
+
+let absorb rec_list =
+  let emit record =
+    let selected, rest = record in
+    let rec aux acc = function
+      | [] -> acc
+      | h :: t ->
+          aux ((h :: selected, t) :: acc) t
+    in
+    aux [] rest
+  in
+  let rec aux acc = function
+    | [] -> acc
+    | h :: t ->
+        aux ((emit h) @ acc) t
+  in
+  aux [] rec_list
+
+let select_n n list =
+  let rec_list = [([], list)] in
+  let rec aux i list =
+    let new_list = absorb list in
+    if i = n then new_list
+    else aux (i + 1) new_list
+  in
+  let raw = aux 1 rec_list in
+  List.map ~f:(fun x -> fst x) raw
+;;
