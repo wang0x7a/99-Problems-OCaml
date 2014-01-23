@@ -37,3 +37,24 @@ let extract (k : int) (lst : 'a list) : ('a list) list =
   let emit x acc = x :: acc in
   loop k [] emit lst
 ;;
+
+(* An ugly version that does not scale *)
+open Core.Std
+
+let select_two list =
+  let select_one list =
+    let rec aux acc = function
+      | [] -> acc
+      | h :: t -> aux (([h], t) :: acc) t
+    in
+    aux [] list
+  in
+  let rec aux acc = function
+    | [] -> acc
+    | h :: t ->
+        let rest = select_one t in
+        let current = List.map ~f:(fun x -> h :: (fst x)) rest in
+        aux (current @ acc) t
+  in
+  aux [] list
+;;
