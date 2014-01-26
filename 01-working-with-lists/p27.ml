@@ -70,10 +70,10 @@ open Core.Std
 let allocate template item =
   let rec aux acc emit = function
     | [] -> acc
-    | h :: t ->
-        let new_emit x = emit (h :: x) in
-        aux (emit [(fst n - 1, item :: snd n)] t) new_emit t
+    | ((n, l) as h) :: t ->
+        let new_emit x = emit (x @ [h]) in
+        aux ((emit [(n - 1, item :: l)] t) :: acc) new_emit t
   in
-  let emit x acc = x @ acc in
+  let emit x acc = acc @ x in
   aux [] emit template
 ;;
