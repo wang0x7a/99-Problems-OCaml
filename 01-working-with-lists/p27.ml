@@ -62,3 +62,18 @@ let group (persons : 'a list) (sizes : int list) : 'a list list list =
   let complete = List.filter (List.for_all (fun (x, _) -> x = 0)) all in
   List.map (List.map snd) complete
 ;;
+
+(* Revisit this problem *)
+open Core.Std
+
+(* Allocate an item to the groups in a template, and return all the combinations *)
+let allocate template item =
+  let rec aux acc emit = function
+    | [] -> acc
+    | h :: t ->
+        let new_emit x = emit (h :: x) in
+        aux (emit [(fst n - 1, item :: snd n)] t) new_emit t
+  in
+  let emit x acc = x @ acc in
+  aux [] emit template
+;;
