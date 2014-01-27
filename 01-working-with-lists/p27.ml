@@ -77,3 +77,29 @@ let allocate template item =
   let emit x acc = acc @ x in
   aux [] emit template
 ;;
+
+(* A version by my own *)
+let group items sizes =
+  let init = List.map ~f:(fun size -> size, []) sizes in
+  let allocate_one template item =
+    let rec aux acc emit = function
+      | [] -> acc
+      | ((n,l) as h) :: t ->
+          let new_emit x = emit (x @ [h]) in
+          let acc = 
+            if n > 0 then (emit [(n - 1, item :: l)] t) :: acc
+            else acc
+          in
+          aux acc new_emit t
+    in
+    let emit x l = l @ x in
+    aux [] emit template
+  in
+  let rec allocate acc = function
+    | [] -> acc
+    | h :: t -> 
+        let acc = List.concat_map ~f:(fun x -> allocate_one x h) acc in
+        allocate acc t
+  in
+  allocate [init] items
+;;
