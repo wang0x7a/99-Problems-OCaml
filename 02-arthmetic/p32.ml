@@ -8,3 +8,14 @@ let gcd (a : int) (b : int) : int =
   if a > b then loop a b
   else loop b a
 ;;
+
+(* Revisit P32 *)
+let gcd a b =
+  let rec loop p q =
+    let r = p mod q in
+    if r = 0 then q
+    else loop q r
+  in
+  if a > b then loop a b
+  else loop b a
+;;
