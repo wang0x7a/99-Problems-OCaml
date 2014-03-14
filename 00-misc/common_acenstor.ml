@@ -25,7 +25,10 @@ let rec lca root p q =
 ;;
 *)
 
-(* Only extrac the value of the ancestor *)
+(* Only extract the value of the ancestor.
+   There is a bug of this version: the algorithm fails when either p or q 
+   is Empty.
+ *)
 let lca root p q =
   let rec helper root p q =
     match (root, p, q) with
